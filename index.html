@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="display"><p id="negative"></p><p id="display">0</p><p id="display-operation"></p></div>
+            <div class="operators-right">
+                <button id="op-backspace">⇐</button>
+                <button class="operator" id="op-divide">÷</button>
+                <button class="operator" id="op-x">×</button>
+                <button class="operator" id="op-minus">-</button>
+                <button class="operator" id="op-plus">+</button>
+                <button id="equal-button" onclick="calculate()">=</button>
+            </div>
+        <div class="operators-top">
+            <button class="operator">%</button>
+            <button id="clearInput" onclick="clearInput()">CE</button>
+            <button id="clear" onclick="clear()">C</button>
+            <button class="operator">1/x</button>
+            <button class="operator">x2</button>
+            <button class="operator">√</button>
+        </div>
+        <div class="numbers">
+            <button class="num" id="num-7">7</button>
+            <button class="num" id="num-8">8</button>
+            <button class="num" id="num-9">9</button>
+            <button class="num" id="num-4">4</button>
+            <button class="num" id="num-5">5</button>
+            <button class="num" id="num-6">6</button>
+            <button class="num" id="num-1">1</button>
+            <button class="num" id="num-2">2</button>
+            <button class="num" id="num-3">3</button>
+            <button class="negative" onclick="negative()">+/-</button>
+            <button class="num" id="num-0">0</button>
+            <button class="decimal" id="decimal">.</button>
+        </div>
+    </div>
+        <script src="script.js"></script>
+    </body>
+     </html>

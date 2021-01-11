@@ -1,5 +1,3 @@
-//check for double dots //seperate negative symbol from number string  
-// SECONDNUM only works with single digit numbers
 var inputBox = '';
 var lastOperation = '';
 var operatorArray = {'+':'op-plus', '-':'op-minus', '/':'op-divide', '*':'op-x', 
@@ -14,15 +12,12 @@ var operator = null;
 var calculating = false;
 var currentNumber = 0; 
 
-//FUNCTIONS 
 function calculate() {
     calculating = false;
     if(firstNum !== null && secondNum !== null) {
     lastOperation = `${firstNum} ${operator} ${secondNum}`
     operationText.textContent = lastOperation;
     }
-    console.log("firstNum= " + firstNum + " " + "secondNum= " + secondNum + " " + "Operator= " + operator);
-    console.log(firstNum + " " + secondNum);
     switch(operator) {
         case "+":
             displayText.textContent = add();
@@ -63,7 +58,7 @@ function calculate() {
             fontSize(displayText.textContent);     
         } 
 }
-function add() { // move all these functions to calculate switch statements
+function add() { 
     var result = (+firstNum + +secondNum);
     firstNum = result;
     return result;
@@ -100,26 +95,24 @@ function percentage() {
 function divideByOne () {
     return 1 / firstNum;
 }
-function negative() { // not finished
+function negative() { 
     if(isNegative == true) {
         displayText.textContent = displayText.textContent.slice(1);
         isNegative = false;
     }
     else {
+        inputBox = "-" + displayText.textContent;
         displayText.textContent = "-" + displayText.textContent;
         isNegative = true;
     }
 }
 function fontSize(input) {
     let size = input.length;
-    console.log("INPUT: " + input + " " + "SIZE: " + size);
     if(size < 10) {
         displayText.style.fontSize = "45px";
-        console.log(displayText.style.fontSize);
     }
     else {
         var computedSize = `${50 - (size + 5)}px`;
-        console.log(computedSize);
         displayText.style.fontSize = computedSize;
     }
 }
@@ -140,7 +133,7 @@ function clearDisplay() {
     displayText.textContent = '';
 }
 
-//need to reformat-- no need for foreach when there is only one element with the selected value
+//EVENT LISTENERS
 document.querySelectorAll("#clear").forEach(e => e.addEventListener("click",
 () => {
     clearDisplay();
@@ -163,7 +156,6 @@ document.querySelectorAll("#clearInput").forEach(e => e.addEventListener("click"
         secondNum = inputBox;
     }
 }))
-
 document.querySelectorAll(".decimal").forEach(e => e.addEventListener("click",
 () => {
     var decimal = false;
@@ -185,15 +177,11 @@ document.querySelectorAll(".num").forEach(e => e.addEventListener("click",
             return;
         }
     }
-     console.log(".num" + " " + firstNum + " " +  secondNum );
     if(calculating == false && secondNum !== null) {
-        console.log(firstNum + "wtf " + secondNum);
         clearDisplay();
         calculating = true;
         inputBox += e.textContent;
         displayText.textContent = inputBox;
-        console.log(secondNum);
-        console.log('1');
         secondNum = inputBox;
         fontSize(inputBox);
     }
@@ -204,17 +192,14 @@ document.querySelectorAll(".num").forEach(e => e.addEventListener("click",
         fontSize(inputBox);
     }
     else {
-        console.log("2 " + calculating + " " + secondNum);
         inputBox += e.textContent;
         displayText.textContent = inputBox;
-        console.log('2');
         fontSize(inputBox);
     }
   }));
 //OPERATOR SELECTION
   document.querySelectorAll(".operator").forEach(e => e.addEventListener("click", 
  () => {
-     console.log("CALCULATE " + inputBox);
     if(calculating) {
         calculate();
      }
@@ -248,8 +233,8 @@ document.querySelectorAll(".num").forEach(e => e.addEventListener("click",
             button.click()
             button.classList.add('js-button');
             return;
+        }
     }
-}
         for(const element in operatorArray) {
             if(element == event.key) {
                 var button = document.getElementById(`${operatorArray[element]}`);
@@ -275,6 +260,6 @@ for(const element in operatorArray) {
     if(element == event.key) {
         var button = document.getElementById(`${operatorArray[element]}`);
         button.classList.remove('js-button');
-}
-}
- })
+        }
+    }
+})

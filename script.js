@@ -1,3 +1,6 @@
+
+//fix text resizing on second number
+ 
 var inputBox = '';
 var lastOperation = '';
 var operatorArray = {'+':'op-plus', '-':'op-minus', '/':'op-divide', '*':'op-x', 
@@ -11,6 +14,7 @@ var secondNum = null;
 var operator = null;
 var calculating = false;
 var currentNumber = 0; 
+var lengthLimit = false;
 
 function calculate() {
     calculating = false;
@@ -106,19 +110,33 @@ function negative() {
         isNegative = true;
     }
 }
-function fontSize(input) {
+function fontSize(input=0, screenType=null) {
     let size = input.length;
-    if(size < 10) {
-        displayText.style.fontSize = "45px";
+    if(window.matchMedia("(max-width: 600px)").matches) {
+        if(size < 10 && input == 'mobile') {
+            console.log("mobile");
+            displayText.style.fontSize = "85px";
+        }
+        else {
+            var computedSize = `${75 - (size + 13)}px`;
+            displayText.style.fontSize = computedSize;
+        }
     }
     else {
-        var computedSize = `${50 - (size + 5)}px`;
-        displayText.style.fontSize = computedSize;
+        if(size < 10 && input == 'window') {
+            console.log("window");
+            displayText.style.fontSize = "45px";
+        }
+        else {
+            var computedSize = `${50 - (size + 5)}px`;
+            displayText.style.fontSize = computedSize;
+        }
     }
 }
 function clear() {
     displayText.textContent = '0';
     operationText.textContent = '';
+    lastOperation = null;
     lastOperation = '';
     firstNum = null;
     secondNum = null;
@@ -142,7 +160,12 @@ document.querySelectorAll("#clear").forEach(e => e.addEventListener("click",
 }))
 document.querySelectorAll("#op-backspace").forEach(e => e.addEventListener("click",
 () => {
-    if(calculating == true || secondNum == null) {
+    if(inputBox.length == 1) {
+        inputBox = '';
+        display.textContent = "0";
+    }
+    else {
+        console.log(inputBox.length);
         inputBox = inputBox.slice(0, -1);
         displayText.textContent = inputBox;
         secondNum == null;
@@ -152,7 +175,7 @@ document.querySelectorAll("#clearInput").forEach(e => e.addEventListener("click"
 () => {
     if(calculating == true || secondNum == null) {
         inputBox = '';
-        displayText.textContent = inputBox;
+        displayText.textContent = '0';
         secondNum = inputBox;
     }
 }))
@@ -172,24 +195,25 @@ document.querySelectorAll(".decimal").forEach(e => e.addEventListener("click",
 //NUMBER SELECTION 
 document.querySelectorAll(".num").forEach(e => e.addEventListener("click", 
  () => {
-    if(inputBox.length >= 18) { 
-        if(operator == null || operator == '') { 
-            return;
-        }
-    }
-    if(calculating == false && secondNum !== null) {
+    if(calculating == false && secondNum !== null && inputBox.length < 19) {
         clearDisplay();
         calculating = true;
         inputBox += e.textContent;
         displayText.textContent = inputBox;
         secondNum = inputBox;
         fontSize(inputBox);
+        return;
     }
-    else if(calculating == true) {
+    else if(calculating == true && inputBox.length < 18) {
         inputBox += e.textContent;
         displayText.textContent = inputBox;
         secondNum = inputBox;
         fontSize(inputBox);
+        return;
+    }
+    if(inputBox.length == 18) {
+        lengthLimit = true;
+        return;
     }
     else {
         inputBox += e.textContent;
@@ -200,6 +224,7 @@ document.querySelectorAll(".num").forEach(e => e.addEventListener("click",
 //OPERATOR SELECTION
   document.querySelectorAll(".operator").forEach(e => e.addEventListener("click", 
  () => {
+    lengthLimit = false;
     if(calculating) {
         calculate();
      }
@@ -215,6 +240,15 @@ document.querySelectorAll(".num").forEach(e => e.addEventListener("click",
         secondNum = "";
      }
  }));
+ //FONT RESIZING 
+ window.addEventListener('resize', function() {
+    if(window.innerWidth <= 600) {
+        fontSize(displayText.textContent, 'mobile');
+    }
+    else {
+        fontSize(displayText.textContent, 'window');
+    }
+});
  //KEYBOARD INPUT
  document.addEventListener("keydown", event => {
     if (event.isComposing || event.key === 229) {
@@ -225,6 +259,7 @@ document.querySelectorAll(".num").forEach(e => e.addEventListener("click",
         var button = document.getElementById("equal-button")
         button.click();
         button.classList.add('js-button-equals');
+        return;
         
     }
     for (i=0; i <= 9; i++) { //key press 0-9
@@ -263,3 +298,4 @@ for(const element in operatorArray) {
         }
     }
 })
+

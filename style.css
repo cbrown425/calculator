@@ -9,6 +9,11 @@ body {
   margin: 0;
 }
 
+.html-dark {
+  background-color: #000000 !important;
+  background-image: linear-gradient(45deg, #000000 0%, #222424 100%) !important;
+}
+
 .display {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -30,6 +35,14 @@ body {
   text-align: right;
 }
 
+.display-dark {
+  border: 1px solid #1f1f1f !important;
+}
+
+.display-dark p {
+  color: white;
+}
+
 #display-operation {
   padding-top: 20px;
   padding-right: 8px;
@@ -37,6 +50,10 @@ body {
   font-weight: bold;
   position: absolute;
   font-size: 12px;
+  color: #9e9e9e;
+}
+
+.display-operation-dark {
   color: #9e9e9e;
 }
 
@@ -52,16 +69,15 @@ body {
   height: 415px;
 }
 
-.operators-right {
-  float: right;
-  display: -ms-grid;
-  display: grid;
+.container-dark {
+  background-color: #1f1f1f;
+  border: 1px solid #1f1f1f;
+  -webkit-box-shadow: 0 0 10px 2px #38393a;
+          box-shadow: 0 0 10px 2px #38393a;
 }
 
-.operators-right button {
+.op-pad {
   border: 1px solid #c1ddea;
-  background: none;
-  padding: 0;
   background-color: #d9e9f2;
   font-size: 19px;
   color: #141414;
@@ -70,16 +86,42 @@ body {
   outline: none;
 }
 
-.operators-right button:hover {
-  background-color: #b8cfd9;
-}
-
-.operators-right button:active:hover {
+.op-pad:active:hover {
   background-color: #a6bbc2;
 }
 
-.operator {
-  background-color: #d9e9f2 !important;
+.op-pad:hover {
+  background-color: #b8cfd9;
+}
+
+.operator-dark {
+  background-color: #131313 !important;
+  color: white !important;
+  border: 1px solid #1f1f1f;
+}
+
+.operator-dark:active:hover {
+  background-color: #6b6b6b;
+}
+
+.operator-dark:hover {
+  z-index: 5;
+  background-color: #575454;
+  -webkit-box-shadow: inset 0 0 2px #646668;
+          box-shadow: inset 0 0 2px #646668;
+}
+
+.operator-dark:active:hover {
+  background-color: #6b6b6b !important;
+}
+
+.operator-dark:active {
+  background-color: #474747;
+}
+
+.function-operator {
+  border: 1px solid #c1ddea;
+  background-color: #d9e9f2;
   font-size: 19px;
   color: #141414;
   width: 72.5px;
@@ -87,13 +129,8 @@ body {
   outline: none;
 }
 
-.function-operator {
-  background-color: #d9e9f2 !important;
-  font-size: 19px;
-  color: #141414;
-  width: 72.5px;
-  height: 52px;
-  outline: none;
+.negative {
+  border: 1px solid #c1ddea;
 }
 
 .numbers {
@@ -107,46 +144,84 @@ body {
 }
 
 .numbers button {
-  border: 1px solid #c1ddea;
-  background: none;
   padding: 0;
   font-size: 16px;
   font-weight: bold;
-  background-color: #f2f8fb;
-  color: #131313;
   width: 72.5px;
   height: 52px;
   outline: none;
 }
 
-.numbers button:active:hover {
-  background-color: #a6bbc2 !important;
+.numpad {
+  border: 1px solid #c1ddea;
+  background-color: #f2f8fb;
+  color: #131313;
 }
 
-.numbers button:hover {
-  background-color: #b8cfd9 !important;
+.numpad:active:hover {
+  background-color: #a6bbc2;
+}
+
+.numpad:hover {
+  background-color: #b8cfd9;
+}
+
+.numbers-dark {
+  border: 1px solid #1f1f1f !important;
+  background-color: #060606 !important;
+  color: white !important;
+}
+
+.numbers-dark:active:hover {
+  background-color: #6b6b6b !important;
+}
+
+.numbers-dark:hover {
+  background-color: #474747 !important;
 }
 
 #equal-button {
-  background-color: #76b7e4 !important;
+  border: 1px solid #c1ddea;
+  background-color: #76b7e4;
+  border: 1px solid #c1ddea;
 }
 
 #equal-button:active:hover {
-  background-color: #0078d7 !important;
+  background-color: #0078d7;
 }
 
 #equal-button:hover {
-  background-color: #3b97dc !important;
+  background-color: #3b97dc;
+}
+
+.equal-button-dark {
+  color: white;
+  background-color: #134369 !important;
+  border: 1px solid #1f1f1f !important;
+}
+
+.equal-button-dark:active:hover {
+  background-color: #0078d7 !important;
+}
+
+.equal-button-dark:hover {
+  background-color: #036fc4 !important;
 }
 
 .js-button {
   background-color: #a6bbc2 !important;
 }
 
+.js-button-dark {
+  background-color: #6b6b6b !important;
+}
+
 .js-button-equals {
   background-color: #0078d7 !important;
-  -webkit-animation: all 0.5s ease-out;
-          animation: all 0.5s ease-out;
+}
+
+.js-button-equals-dark {
+  background-color: #0078d7 !important;
 }
 
 @media only screen and (max-width: 600px) {
@@ -197,5 +272,10 @@ body {
     width: auto;
     height: auto;
   }
+}
+
+@font-face {
+  font-family: calcFonts;
+  src: url(CalcMDL2.ttf);
 }
 /*# sourceMappingURL=style.css.map */

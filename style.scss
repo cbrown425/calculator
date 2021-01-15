@@ -79,9 +79,7 @@ html {
             background-color: rgb(107, 107, 107);
             }
             &:hover {
-                z-index: 5;
                 background-color: rgb(87, 84, 84);
-                box-shadow: inset 0 0 2px rgb(100, 102, 104);
             }
         background-color:rgb(19, 19, 19) !important;
         color:rgb(255, 255, 255) !important;
@@ -217,7 +215,3 @@ html {
                 }
             }
         }
-        @font-face {
-            font-family: calcFonts;
-            src: url(CalcMDL2.ttf);
-          }

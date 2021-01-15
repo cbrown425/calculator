@@ -114,6 +114,17 @@ function negative() {
         isNegative = true;
     }
 }
+function backspace() {
+    if(inputBox.length == 1 || inputBox.length == 0) {
+        inputBox = '';
+        display.textContent = "0";
+    }
+    else {
+        inputBox = inputBox.slice(0, -1);
+        displayText.textContent = inputBox;
+        secondNum == null;
+    }
+}
 function fontSize(input=0, screenType=null) {
     let size = input.length;
     if(window.matchMedia("(max-width: 600px)").matches) {
@@ -204,15 +215,7 @@ document.querySelectorAll("#clear").forEach(e => e.addEventListener("click",
 }))
 document.querySelectorAll("#op-backspace").forEach(e => e.addEventListener("click",
 () => {
-    if(inputBox.length == 1 || inputBox.length == 0) {
-        inputBox = '';
-        display.textContent = "0";
-    }
-    else {
-        inputBox = inputBox.slice(0, -1);
-        displayText.textContent = inputBox;
-        secondNum == null;
-    }
+    backspace();
 }))
 document.querySelectorAll("#clearInput").forEach(e => e.addEventListener("click",
 () => {
@@ -294,7 +297,10 @@ document.querySelectorAll(".num").forEach(e => e.addEventListener("click",
 });
  //KEYBOARD INPUT
  document.addEventListener("keydown", event => {
-    if (event.isComposing || event.key === 229) {
+    if(event.key === "Backspace") {
+        backspace();
+    }
+    else if (event.isComposing || event.key === 229) {
       return;
     }
     else if (event.key === "Enter") {

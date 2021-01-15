@@ -7,12 +7,16 @@ html {
     body{
         margin: 0;
     }
+    .html-dark {
+        background-color: #000000 !important;
+        background-image: linear-gradient(45deg, #000000 0%, #222424 100%) !important;        
+    }
     .display {
         display:flex;
         justify-content: flex-end;
         width: auto;
         height: 100px;
-        border: 1px solid rgb(190, 219, 233); 
+        border: 1px solid rgb(190, 219, 233);  
         p {
             margin-top: 2rem;
             margin-right: 0.3rem;
@@ -22,6 +26,12 @@ html {
             text-align: right;
         }
     }
+    .display-dark {
+        p {
+            color:rgb(255,255,255);
+        }
+        border: 1px solid rgb(31, 31, 31) !important;
+    }
     #display-operation {
         padding-top: 20px;
         padding-right: 8px;
@@ -29,6 +39,9 @@ html {
         font-weight: bold;
         position: absolute;
         font-size: 12px;
+        color: rgb(158, 158, 158);
+    }
+    .display-operation-dark {
         color: rgb(158, 158, 158);
     }
     .container {
@@ -41,42 +54,56 @@ html {
         width: 290px;
         height: 415px;
     }
-    .operators-right {
-        float:right;
-        display:grid;
-        button {
+    .container-dark {
+        background-color:rgb(31, 31, 31);
+        border: 1px solid rgb(31, 31, 31);
+        box-shadow: 0 0 10px 2px rgb(56, 57, 58);
+    }
+    .op-pad {
+        &:active:hover {
+            background-color: rgb(166, 187, 194);
+            }
             &:hover {
                 background-color: rgb(184, 207, 217);
             }
+        border: 1px solid rgb(193, 221, 234);
+        background-color:rgb(217, 233, 242);
+        font-size: 19px;
+        color:rgb(20, 20, 20);
+        width: 72.5px;
+        height: 52px;
+        outline: none;            
+    }
+    .operator-dark {
             &:active:hover {
-                background-color: rgb(166, 187, 194);
+            background-color: rgb(107, 107, 107);
             }
-            border: 1px solid rgb(193, 221, 234);
-            background: none;
-            padding: 0;
-            background-color:rgb(217, 233, 242);
-            font-size: 19px;
-            color:rgb(20, 20, 20);
-            width: 72.5px;
-            height: 52px;
-            outline: none;
+            &:hover {
+                z-index: 5;
+                background-color: rgb(87, 84, 84);
+                box-shadow: inset 0 0 2px rgb(100, 102, 104);
+            }
+        background-color:rgb(19, 19, 19) !important;
+        color:rgb(255, 255, 255) !important;
+        border: 1px solid rgb(31, 31, 31);
+        &:active:hover {
+            background-color: rgb(107, 107, 107) !important;
+        }
+        &:active {
+            background-color: rgb(71, 71, 71);
         }
     }
-    .operator {
-        background-color:rgb(217, 233, 242) !important;
-        font-size: 19px;
-        color:rgb(20, 20, 20);
-        width: 72.5px;
-        height: 52px;
-        outline: none;            
-}
     .function-operator {
-        background-color:rgb(217, 233, 242) !important;
+        border: 1px solid rgb(193, 221, 234);
+        background-color:rgb(217, 233, 242);
         font-size: 19px;
         color:rgb(20, 20, 20);
         width: 72.5px;
         height: 52px;
         outline: none;            
+    }
+    .negative {
+        border: 1px solid rgb(193, 221, 234);
     }
     .numbers {
         display:grid;
@@ -84,39 +111,69 @@ html {
         grid-template-columns: 1fr 1fr 1fr 1fr;
         width: 75%;
         button {
-            &:active:hover {
-                background-color: rgb(166, 187, 194) !important;
-            }
-            &:hover {
-                background-color: rgb(184, 207, 217) !important;
-            }
-            border: 1px solid rgb(193, 221, 234);
-            background: none;
             padding: 0;
             font-size: 16px;
             font-weight: bold;
-            background-color:rgb(242, 248, 251);
-            color:rgb(19, 19, 19);
             width: 72.5px;
             height: 52px;
             outline: none;
         }
     }
+    .numpad {
+        border: 1px solid rgb(193, 221, 234);
+        &:active:hover {
+            background-color: rgb(166, 187, 194);
+            }
+            &:hover {
+                background-color: rgb(184, 207, 217);
+            }
+        background-color:rgb(242, 248, 251);
+        color: rgb(19, 19, 19);
+    }
+    .numbers-dark {
+            &:active:hover {
+                background-color: rgb(107, 107, 107) !important;
+            }
+            &:hover {
+                background-color: rgb(71, 71, 71) !important;
+            }
+            border: 1px solid rgb(31, 31, 31) !important;
+            background-color:rgb(6, 6, 6) !important;
+            color:rgb(255, 255, 255) !important;
+}
     #equal-button {
+        border: 1px solid rgb(193, 221, 234);
+        &:active:hover {
+            background-color: rgb(0, 120, 215);
+        }
+        &:hover {
+            background-color:rgb(59,151,220);
+        }
+        background-color: rgb(118,183,228);
+        border: 1px solid rgb(193, 221, 234);
+    }
+    .equal-button-dark {
+        color: rgb(255, 255, 255);
         &:active:hover {
             background-color: rgb(0, 120, 215) !important;
         }
         &:hover {
-            background-color:rgb(59,151,220) !important;
+            background-color:rgb(3, 111, 196) !important;
         }
-        background-color: rgb(118,183,228) !important;
-    }
+        background-color: rgb(19, 67, 105) !important;
+        border: 1px solid rgb(31, 31, 31) !important;
+    }    
     .js-button {
         background-color: rgb(166, 187, 194) !important;
     }
+    .js-button-dark {
+        background-color: rgb(107, 107, 107) !important;
+    }
     .js-button-equals {
         background-color: rgb(0, 120, 215) !important;
-        animation: all 0.5s ease-out;
+    }
+    .js-button-equals-dark {
+        background-color: rgb(0, 120, 215) !important;
     }
     @media only screen and (max-width: 600px) {
             .display {
@@ -160,3 +217,7 @@ html {
                 }
             }
         }
+        @font-face {
+            font-family: calcFonts;
+            src: url(CalcMDL2.ttf);
+          }

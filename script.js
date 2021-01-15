@@ -1,20 +1,19 @@
-
-//fix text resizing on second number
- 
+var operationText = document.querySelector("#display-operation");
+var displayText = document.querySelector("#display");
+var negativeText = document.querySelector(".negative");
+var equalsButton = document.getElementById("equal-button");
+var operatorArray = {'+':'op-plus', '-':'op-minus', '/':'op-divide', 
+'*':'op-x', '.':'decimal', 'Clear':'clear', 'Delete':'clear'};
+var darkModeEnabled = false;
 var inputBox = '';
 var lastOperation = '';
-var operatorArray = {'+':'op-plus', '-':'op-minus', '/':'op-divide', '*':'op-x', 
-'.':'decimal', 'Clear':'clear', 'Delete':'clear'};
-var operationText = document.querySelector("#display-operation"); // shows previous operation on display
-var displayText = document.querySelector("#display");
-var negativeText = document.querySelector("#negative");
 var isNegative = null;
 var firstNum = null;
 var secondNum = null;
 var operator = null;
 var calculating = false;
-var currentNumber = 0; 
 var lengthLimit = false;
+var currentNumber = 0; 
 
 function calculate() {
     calculating = false;
@@ -78,9 +77,14 @@ function multiply() {
     return result;
 }
 function divide() {
-    var result = firstNum / secondNum;
-    firstNum = result;
-    return result;
+    if(firstNum == '0' || secondNum == '0') {
+        darkMode();
+    }
+    else {
+        var result = firstNum / secondNum;
+        firstNum = result;
+        return result;
+    }
 }
 function exponent() {
     return firstNum + secondNum;
@@ -94,7 +98,7 @@ function squareRoot() {
     return Math.sqrt(firstNum);
 }
 function percentage() {
-    return; 
+    return firstNum * (secondNum / 100); 
 }
 function divideByOne () {
     return 1 / firstNum;
@@ -114,7 +118,6 @@ function fontSize(input=0, screenType=null) {
     let size = input.length;
     if(window.matchMedia("(max-width: 600px)").matches) {
         if(size < 10 && input == 'mobile') {
-            console.log("mobile");
             displayText.style.fontSize = "85px";
         }
         else {
@@ -124,7 +127,6 @@ function fontSize(input=0, screenType=null) {
     }
     else {
         if(size < 10 && input == 'window') {
-            console.log("window");
             displayText.style.fontSize = "45px";
         }
         else {
@@ -133,24 +135,66 @@ function fontSize(input=0, screenType=null) {
         }
     }
 }
+function darkMode() {
+  if(darkModeEnabled == false) {
+    document.querySelectorAll("html").forEach((e) => {
+        e.classList.add("html-dark");
+    });
+    document.querySelectorAll(".container").forEach((e) => {
+        e.classList.add("container-dark");
+    });
+    document.querySelectorAll(".display").forEach((e) => {
+        e.classList.add("display-dark");
+    });
+    document.querySelectorAll(".op-pad").forEach((e) => {
+        e.classList.add("operator-dark");
+    });
+    document.querySelectorAll(".numpad").forEach((e) => {
+        e.classList.add("numbers-dark");
+    });
+    document.querySelectorAll("#equal-button").forEach((e) => {
+        e.classList.add("equal-button-dark");
+    });
+    darkModeEnabled = true;
+  }
+  else {
+    document.querySelectorAll("html").forEach((e) => {
+        e.classList.remove("html-dark");
+    });
+    document.querySelectorAll(".display").forEach((e) => {
+        e.classList.remove("display-dark");
+    });
+    document.querySelectorAll(".container").forEach((e) => {
+        e.classList.remove("container-dark");
+    });
+    document.querySelectorAll(".op-pad").forEach((e) => {
+        e.classList.remove("operator-dark");
+    });
+    document.querySelectorAll(".numpad").forEach((e) => {
+        e.classList.remove("numbers-dark");
+    });
+    document.querySelectorAll("#equal-button").forEach((e) => {
+        e.classList.remove("equal-button-dark");
+    });
+    darkModeEnabled = false;
+  }
+}
 function clear() {
     displayText.textContent = '0';
     operationText.textContent = '';
-    lastOperation = null;
     lastOperation = '';
+    inputBox = '';
+    calculating = false;
+    isNegative = false;
     firstNum = null;
     secondNum = null;
     operator = null;
-    calculating = false;
-    isNegative = false;
-    inputBox = '';
 }
 function clearDisplay() {
+    displayText.textContent = '';
     lastOperation = '';
     inputBox = '';
-    displayText.textContent = '';
 }
-
 //EVENT LISTENERS
 document.querySelectorAll("#clear").forEach(e => e.addEventListener("click",
 () => {
@@ -160,12 +204,11 @@ document.querySelectorAll("#clear").forEach(e => e.addEventListener("click",
 }))
 document.querySelectorAll("#op-backspace").forEach(e => e.addEventListener("click",
 () => {
-    if(inputBox.length == 1) {
+    if(inputBox.length == 1 || inputBox.length == 0) {
         inputBox = '';
         display.textContent = "0";
     }
     else {
-        console.log(inputBox.length);
         inputBox = inputBox.slice(0, -1);
         displayText.textContent = inputBox;
         secondNum == null;
@@ -179,7 +222,7 @@ document.querySelectorAll("#clearInput").forEach(e => e.addEventListener("click"
         secondNum = inputBox;
     }
 }))
-document.querySelectorAll(".decimal").forEach(e => e.addEventListener("click",
+document.querySelectorAll("#decimal").forEach(e => e.addEventListener("click",
 () => {
     var decimal = false;
     for(i = 0; i < inputBox.length; i++) {
@@ -255,39 +298,60 @@ document.querySelectorAll(".num").forEach(e => e.addEventListener("click",
       return;
     }
     else if (event.key === "Enter") {
-        event.preventDefault();
-        var button = document.getElementById("equal-button")
-        button.click();
-        button.classList.add('js-button-equals');
-        return;
-        
-    }
-    for (i=0; i <= 9; i++) { //key press 0-9
-        if(event.key == i) {
-            var button = document.getElementById(`num-${i}`);
-            button.click()
-            button.classList.add('js-button');
+        if(!darkMode) {
+            event.preventDefault();
+            equalsButton.click();
+            equalsButton.classList.add('js-button-equals');
             return;
         }
+        else {
+            event.preventDefault();
+            equalsButton.click();
+            equalsButton.classList.add('js-button-equals-dark');
+        }
+        
     }
-        for(const element in operatorArray) {
-            if(element == event.key) {
-                var button = document.getElementById(`${operatorArray[element]}`);
-                button.click();
-                button.classList.add('js-button');
+    for (i=0; i <= 9; i++) {
+        if(event.key == i) {
+            if(!darkMode) {
+                var buttonSelect = document.getElementById(`num-${i}`);
+                buttonSelect.click()
+                buttonSelect.classList.add('js-button');
+                return;
+            }
+            else {
+                var buttonSelect = document.getElementById(`num-${i}`);
+                buttonSelect.click()
+                buttonSelect.classList.add('js-button-dark');
+            }
         }
     }
- });
+    for(const element in operatorArray) {
+        if(element == event.key) {
+            if(!darkMode) {
+                var buttonSelect = document.getElementById(`${operatorArray[element]}`);
+                buttonSelect.click();
+                buttonSelect.classList.add('js-button');
+            }
+            else {
+                var buttonSelect = document.getElementById(`${operatorArray[element]}`);
+                buttonSelect.click();
+                buttonSelect.classList.add('js-button-dark');  
+                }
+            }
+        }      
+    });
  //REMOVING BUTTON STYLING WHEN KEY IS LIFTED
  document.addEventListener("keyup", event => { 
     if (event.key === "Enter") {
-        var button = document.getElementById("equal-button");
-        button.classList.remove('js-button-equals');
+        equalsButton.classList.remove('js-button-equals');
+        equalsButton.classList.remove('js-button-equals-dark');
     }
-    for (i=0; i <= 9; i++) { //key press 0-9
+    for (i=0; i <= 9; i++) {
         if(event.key == i) {
             var button = document.getElementById(`num-${i}`);
             button.classList.remove('js-button');
+            button.classList.remove('js-button-dark');
             return;
     }
 }
@@ -295,6 +359,7 @@ for(const element in operatorArray) {
     if(element == event.key) {
         var button = document.getElementById(`${operatorArray[element]}`);
         button.classList.remove('js-button');
+        button.classList.remove('js-button-dark');
         }
     }
 })

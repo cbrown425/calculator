@@ -127,12 +127,21 @@ function backspace() {
 }
 function fontSize(input=0, screenType=null) {
     let size = input.length;
-    if(window.matchMedia("(max-width: 600px)").matches) {
+    if(window.matchMedia("(max-width: 719px)").matches && window.innerWidth <= 719 && window.innerWidth > 450) {
         if(size < 10 && input == 'mobile') {
             displayText.style.fontSize = "85px";
         }
         else {
             var computedSize = `${75 - (size + 13)}px`;
+            displayText.style.fontSize = computedSize;
+        }
+    }
+    else if(window.matchMedia("(max-width: 450px)").matches) {
+        if(size < 10 && input == 'mobile-small') {
+            displayText.style.fontSize = "70px";
+        }
+        else {
+            var computedSize = `${60 - (size + 12)}px`;
             displayText.style.fontSize = computedSize;
         }
     }
@@ -288,8 +297,11 @@ document.querySelectorAll(".num").forEach(e => e.addEventListener("click",
  }));
  //FONT RESIZING 
  window.addEventListener('resize', function() {
-    if(window.innerWidth <= 600) {
+    if(window.innerWidth <= 719 && window.innerWidth > 450) {
         fontSize(displayText.textContent, 'mobile');
+    }
+    else if(window.innerWidth <=450) {
+        fontSize(displayText.textContent, 'mobile-small');
     }
     else {
         fontSize(displayText.textContent, 'window');
@@ -315,7 +327,6 @@ document.querySelectorAll(".num").forEach(e => e.addEventListener("click",
             equalsButton.click();
             equalsButton.classList.add('js-button-equals-dark');
         }
-        
     }
     for (i=0; i <= 9; i++) {
         if(event.key == i) {

@@ -105,7 +105,7 @@ body {
 }
 
 .operator-dark:hover {
-  background-color: #575454;
+  background-color: #575454 !important;
 }
 
 .operator-dark:active:hover {

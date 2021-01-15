@@ -101,7 +101,7 @@ body {
 }
 
 .operator-dark:active:hover {
-  background-color: #6b6b6b;
+  background-color: #6b6b6b !important;
 }
 
 .operator-dark:hover {
@@ -221,7 +221,7 @@ body {
   background-color: #0078d7 !important;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 450px) and (max-width: 719px) {
   .display {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -242,9 +242,11 @@ body {
     text-align: right;
   }
   #display-operation {
+    width: auto;
+    margin-bottom: 4px;
     font-weight: bold;
     position: absolute;
-    font-size: 20px;
+    font-size: 16px;
   }
   .container {
     margin: 0;
@@ -271,8 +273,55 @@ body {
   }
 }
 
-@font-face {
-  font-family: calcFonts;
-  src: url(CalcMDL2.ttf);
+@media only screen and (max-width: 450px) {
+  .display {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    width: auto;
+    min-height: 16%;
+    border: 1px solid #bedbe9;
+  }
+  .display p {
+    margin-bottom: 5vw;
+    margin-right: 0.3rem;
+    font-size: 70px;
+    font-weight: bold;
+    font-family: arial;
+    text-align: right;
+  }
+  #display-operation {
+    width: auto;
+    font-weight: bold;
+    position: absolute;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  .container {
+    margin: 0;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    width: 100vw;
+    height: 100vh;
+  }
+  .numbers {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: auto;
+        grid-template-rows: auto;
+    -ms-grid-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 100%;
+    height: 84%;
+  }
+  .numbers button {
+    width: auto;
+    height: auto;
+  }
 }
 /*# sourceMappingURL=style.css.map */

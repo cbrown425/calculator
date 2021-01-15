@@ -105,10 +105,7 @@ body {
 }
 
 .operator-dark:hover {
-  z-index: 5;
   background-color: #575454;
-  -webkit-box-shadow: inset 0 0 2px #646668;
-          box-shadow: inset 0 0 2px #646668;
 }
 
 .operator-dark:active:hover {

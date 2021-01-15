@@ -76,10 +76,10 @@ html {
     }
     .operator-dark {
             &:active:hover {
-            background-color: rgb(107, 107, 107);
+            background-color: rgb(107, 107, 107) !important;
             }
             &:hover {
-                background-color: rgb(87, 84, 84);
+                background-color: rgb(87, 84, 84) !important;
             }
         background-color:rgb(19, 19, 19) !important;
         color:rgb(255, 255, 255) !important;
